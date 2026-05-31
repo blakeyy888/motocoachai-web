@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moto Coach AI — Upload a clip. Get coached.</title>
+  <meta name="description" content="AI-powered motocross coaching. Upload a short riding clip and get instant analysis of your body position, balance, and lines.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 84'%3E%3Crect width='84' height='84' rx='18' fill='%23FAFAF7'/%3E%3Cpath d='M 14 62 L 14 22 L 26 44 L 38 22 L 38 62' stroke='%2318181B' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='26' cy='44' r='3.5' fill='%23DC2626'/%3E%3Cpath d='M 68 30 A 14 14 0 1 0 68 54' stroke='%2318181B' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3Ctext x='58' y='47' text-anchor='middle' font-family='system-ui' font-size='11' font-weight='600' fill='%23DC2626'%3EAI%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #FAFAF7;
+      --surface: #FFFFFF;
+      --text: #18181B;
+      --text-secondary: #71717A;
+      --text-tertiary: #A1A1AA;
+      --border: #E4E4E7;
+      --accent: #DC2626;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0A0A0A;
+        --surface: #18181B;
+        --text: #FAFAF7;
+        --text-secondary: #A1A1AA;
+        --text-tertiary: #71717A;
+        --border: #27272A;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.55;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; width: 100%; }
+    header { padding: 32px 0; border-bottom: 0.5px solid var(--border); }
+    .wordmark { display: inline-flex; align-items: baseline; gap: 8px; text-decoration: none; }
+    .wordmark .name { font-size: 18px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
+    .wordmark .ai { font-size: 11px; font-weight: 600; color: var(--accent); letter-spacing: 0.12em; }
+    main { flex: 1; padding: 64px 0 96px; }
+    .hero { text-align: center; padding: 48px 0; }
+    .logo-mark { width: 96px; height: 96px; margin: 0 auto 32px; display: block; }
+    .eyebrow {
+      font-size: 12px; font-weight: 600; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 44px; font-weight: 600; letter-spacing: -0.02em;
+      margin-bottom: 16px; line-height: 1.15;
+    }
+    .tagline {
+      font-size: 20px; color: var(--text-secondary); line-height: 1.5;
+      max-width: 540px; margin: 0 auto 40px;
+    }
+    .cta {
+      display: inline-block; padding: 14px 28px; background: var(--accent);
+      color: #fff; font-size: 16px; font-weight: 600; text-decoration: none;
+      border-radius: 14px; transition: opacity 0.15s;
+    }
+    .cta:hover { opacity: 0.9; }
+    .cta.disabled { background: var(--text-tertiary); cursor: not-allowed; }
+    section.features { margin-top: 96px; }
+    .section-label {
+      font-size: 12px; font-weight: 600; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px;
+    }
+    h2 { font-size: 30px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 32px; }
+    .feature-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .feature {
+      background: var(--surface); border: 0.5px solid var(--border);
+      border-radius: 14px; padding: 24px;
+    }
+    .feature h3 {
+      font-size: 17px; font-weight: 600; margin-bottom: 8px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .feature .icon { color: var(--accent); font-size: 18px; }
+    .feature p { font-size: 15px; color: var(--text-secondary); line-height: 1.55; }
+    footer { padding: 32px 0; border-top: 0.5px solid var(--border); }
+    .footer-row {
+      display: flex; flex-wrap: wrap; justify-content: space-between;
+      align-items: center; gap: 16px; font-size: 13px; color: var(--text-secondary);
+    }
+    .footer-links a {
+      color: var(--text-secondary); text-decoration: none; margin-left: 20px;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    @media (max-width: 600px) {
+      h1 { font-size: 34px; }
+      .tagline { font-size: 17px; }
+      .hero { padding: 24px 0; }
+      .footer-links a { margin-left: 0; margin-right: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="/" class="wordmark">
+        <svg width="28" height="28" viewBox="0 0 84 84">
+          <rect width="84" height="84" rx="18" fill="var(--surface)"/>
+          <path d="M 14 62 L 14 22 L 26 44 L 38 22 L 38 62" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="26" cy="44" r="3.5" fill="#DC2626"/>
+          <path d="M 68 30 A 14 14 0 1 0 68 54" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <text x="58" y="47" text-anchor="middle" font-family="system-ui" font-size="11" font-weight="600" fill="#DC2626">AI</text>
+        </svg>
+        <span class="name">Moto Coach</span>
+        <span class="ai">AI</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="hero">
+        <svg class="logo-mark" viewBox="0 0 84 84">
+          <rect width="84" height="84" rx="18" fill="var(--surface)" stroke="var(--border)" stroke-width="0.5"/>
+          <path d="M 14 62 L 14 22 L 26 44 L 38 22 L 38 62" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="26" cy="44" r="3.5" fill="#DC2626"/>
+          <path d="M 68 30 A 14 14 0 1 0 68 54" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <text x="58" y="47" text-anchor="middle" font-family="system-ui" font-size="11" font-weight="600" fill="#DC2626">AI</text>
+        </svg>
+        <div class="eyebrow">Coming soon to iOS</div>
+        <h1>Upload a clip. Get coached.</h1>
+        <p class="tagline">AI-powered motocross coaching. Pick a short riding clip from your phone, and get instant feedback on your body position, balance, and lines — written like your coach was watching.</p>
+        <a href="#" class="cta disabled" aria-disabled="true">App Store launch coming</a>
+      </div>
+
+      <section class="features">
+        <div class="section-label">What it does</div>
+        <h2>Real coaching, from real footage.</h2>
+        <div class="feature-grid">
+          <div class="feature">
+            <h3><span class="icon">●</span> See your scenario</h3>
+            <p>Corners, jumps, ruts, straights — the app reads your clip and identifies what you're riding through.</p>
+          </div>
+          <div class="feature">
+            <h3><span class="icon">●</span> Get your scores</h3>
+            <p>Body position, balance, and control rated on every clip, with a breakdown of where you're strongest and where to focus.</p>
+          </div>
+          <div class="feature">
+            <h3><span class="icon">●</span> Hear the coaching</h3>
+            <p>Phase-by-phase tips — entry, apex, exit — written in plain motocross language with the technique cues a coach would actually give.</p>
+          </div>
+          <div class="feature">
+            <h3><span class="icon">●</span> Practice with purpose</h3>
+            <p>Every session ends with a recommended drill so you know exactly what to work on next time you ride.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <div>© 2026 Moto Coach AI LLC</div>
+        <div class="footer-links">
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="mailto:support@motocoachai.app">Support</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
