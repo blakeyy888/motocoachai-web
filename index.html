@@ -3,166 +3,708 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moto Coach AI — Upload a clip. Get coached.</title>
-  <meta name="description" content="AI-powered motocross coaching. Upload a short riding clip and get instant analysis of your body position, balance, and lines.">
+  <title>Moto Coach AI — Real Coaching. Pocket Sized.</title>
+  <meta name="description" content="AI motocross coaching trained on a real pro. 28 years on the bike. 16 as a pro. Upload a clip and get coached.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 84'%3E%3Crect width='84' height='84' rx='18' fill='%23FAFAF7'/%3E%3Cpath d='M 14 62 L 14 22 L 26 44 L 38 22 L 38 62' stroke='%2318181B' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='26' cy='44' r='3.5' fill='%23DC2626'/%3E%3Cpath d='M 68 30 A 14 14 0 1 0 68 54' stroke='%2318181B' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3Ctext x='58' y='47' text-anchor='middle' font-family='system-ui' font-size='11' font-weight='600' fill='%23DC2626'%3EAI%3C/text%3E%3C/svg%3E">
+
+  <!-- Fonts: athletic display + clean body + telemetry mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg: #FAFAF7;
-      --surface: #FFFFFF;
-      --text: #18181B;
-      --text-secondary: #71717A;
-      --text-tertiary: #A1A1AA;
-      --border: #E4E4E7;
+      --bg: #0B0B0D;
+      --bg-cream: #FAFAF7;
+      --surface: #16161A;
+      --surface-elev: #1E1E22;
+      --border: rgba(255,255,255,0.08);
+      --border-cream: #E4E4DD;
+      --text: #FAFAF7;
+      --text-secondary: #A8A8A2;
+      --text-tertiary: #6B6B66;
+      --text-dark: #18181B;
+      --text-dark-secondary: #52525B;
       --accent: #DC2626;
+      --accent-warm: #F97316;
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0A0A0A;
-        --surface: #18181B;
-        --text: #FAFAF7;
-        --text-secondary: #A1A1AA;
-        --text-tertiary: #71717A;
-        --border: #27272A;
-      }
-    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
+    html { scroll-behavior: smooth; }
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay — adds tactile atmosphere, breaks the "flat AI design" look */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.4;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    }
+
+    .display { font-family: 'Big Shoulders Display', 'Anton', sans-serif; font-weight: 800; letter-spacing: -0.01em; line-height: 0.92; }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; width: 100%; position: relative; z-index: 2; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(11, 11, 13, 0.78);
+      backdrop-filter: saturate(140%) blur(14px);
+      -webkit-backdrop-filter: saturate(140%) blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-row { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+    .wordmark { display: inline-flex; align-items: baseline; gap: 8px; text-decoration: none; color: var(--text); }
+    .wordmark .name { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+    .wordmark .ai { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 0.18em; }
+    .header-cta {
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--text-secondary); text-decoration: none;
+      padding: 8px 14px; border: 1px solid var(--border); border-radius: 999px;
+      transition: all 0.25s;
+    }
+    .header-cta:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+
+    /* HERO */
+    .hero {
+      padding: 88px 0 120px;
+      position: relative;
+      overflow: hidden;
+      min-height: 92vh;
+      display: flex; align-items: center;
+    }
+    .hero::after {
+      /* atmospheric radial glow */
+      content: '';
+      position: absolute;
+      width: 900px; height: 900px;
+      top: -200px; right: -300px;
+      background: radial-gradient(closest-side, rgba(220,38,38,0.10), transparent 75%);
+      pointer-events: none;
+    }
+    .hero-grid { width: 100%; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.18em;
+      color: var(--accent);
+      padding: 7px 13px;
+      border: 1px solid rgba(220,38,38,0.35);
+      border-radius: 999px;
+      background: rgba(220,38,38,0.06);
+      margin-bottom: 28px;
+      animation: rise 0.7s 0.05s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .hero-eyebrow .pulse {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+      animation: pulse 2.4s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+    .hero h1 {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 900;
+      font-size: clamp(56px, 11vw, 168px);
+      line-height: 0.88;
+      letter-spacing: -0.015em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      animation: rise 0.85s 0.1s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    .hero h1 .accent { color: var(--accent); display: inline-block; }
+    .hero h1 .line { display: block; }
+    .hero h1 .stroke {
+      -webkit-text-stroke: 1.5px var(--text);
+      color: transparent;
+    }
+    .hero-sub {
+      font-size: clamp(17px, 1.6vw, 21px);
+      color: var(--text-secondary);
+      max-width: 580px;
+      margin: 0 0 44px;
       line-height: 1.55;
-      display: flex;
-      flex-direction: column;
+      animation: rise 0.85s 0.25s cubic-bezier(0.16,1,0.3,1) both;
     }
-    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; width: 100%; }
-    header { padding: 32px 0; border-bottom: 0.5px solid var(--border); }
-    .wordmark { display: inline-flex; align-items: baseline; gap: 8px; text-decoration: none; }
-    .wordmark .name { font-size: 18px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
-    .wordmark .ai { font-size: 11px; font-weight: 600; color: var(--accent); letter-spacing: 0.12em; }
-    main { flex: 1; padding: 64px 0 96px; }
-    .hero { text-align: center; padding: 48px 0; }
-    .logo-mark { width: 96px; height: 96px; margin: 0 auto 32px; display: block; }
-    .eyebrow {
-      font-size: 12px; font-weight: 600; color: var(--accent);
-      text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px;
+    .hero-cta-row {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 18px;
+      animation: rise 0.85s 0.4s cubic-bezier(0.16,1,0.3,1) both;
     }
-    h1 {
-      font-size: 44px; font-weight: 600; letter-spacing: -0.02em;
-      margin-bottom: 16px; line-height: 1.15;
+    .cta-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 26px;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px; font-weight: 700;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
+      border: 1px solid var(--accent);
     }
-    .tagline {
-      font-size: 20px; color: var(--text-secondary); line-height: 1.5;
-      max-width: 540px; margin: 0 auto 40px;
+    .cta-primary:hover {
+      background: #ef4444;
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px -12px rgba(220,38,38,0.5);
     }
-    .cta {
-      display: inline-block; padding: 14px 28px; background: var(--accent);
-      color: #fff; font-size: 16px; font-weight: 600; text-decoration: none;
-      border-radius: 14px; transition: opacity 0.15s;
+    .cta-primary .arrow { display: inline-block; transition: transform 0.25s; }
+    .cta-primary:hover .arrow { transform: translateX(3px); }
+    .cta-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
     }
-    .cta:hover { opacity: 0.9; }
-    .cta.disabled { background: var(--text-tertiary); cursor: not-allowed; }
-    section.features { margin-top: 96px; }
+
+    @keyframes rise {
+      0% { opacity: 0; transform: translateY(28px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* COACH SECTION */
+    .coach {
+      background: var(--bg-cream);
+      color: var(--text-dark);
+      padding: 120px 0;
+      position: relative;
+    }
+    .coach::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    .coach-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: center;
+    }
     .section-label {
-      font-size: 12px; font-weight: 600; color: var(--accent);
-      text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: flex; align-items: center; gap: 12px;
     }
-    h2 { font-size: 30px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 32px; }
-    .feature-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
+    .section-label::before {
+      content: ''; display: inline-block; width: 22px; height: 1px; background: var(--accent);
     }
-    .feature {
-      background: var(--surface); border: 0.5px solid var(--border);
-      border-radius: 14px; padding: 24px;
+    .coach-heading {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 800;
+      font-size: clamp(38px, 5.5vw, 72px);
+      line-height: 0.92;
+      letter-spacing: -0.015em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      color: var(--text-dark);
     }
-    .feature h3 {
-      font-size: 17px; font-weight: 600; margin-bottom: 8px;
-      display: flex; align-items: center; gap: 10px;
+    .coach-heading em {
+      font-style: normal;
+      color: var(--accent);
     }
-    .feature .icon { color: var(--accent); font-size: 18px; }
-    .feature p { font-size: 15px; color: var(--text-secondary); line-height: 1.55; }
-    footer { padding: 32px 0; border-top: 0.5px solid var(--border); }
+    .coach-body {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--text-dark-secondary);
+      max-width: 520px;
+    }
+    .coach-body p + p { margin-top: 18px; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border-cream);
+      border: 1px solid var(--border-cream);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .stat {
+      background: var(--bg-cream);
+      padding: 36px 28px;
+      transition: background 0.3s;
+    }
+    .stat:hover { background: #fff; }
+    .stat-num {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 900;
+      font-size: clamp(54px, 7vw, 88px);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .stat-num .small {
+      font-size: 0.5em;
+      color: var(--accent);
+      vertical-align: top;
+      font-weight: 700;
+    }
+    .stat-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-dark-secondary);
+      line-height: 1.4;
+    }
+
+    /* MOAT — what makes this different */
+    .moat {
+      background: var(--bg);
+      padding: 120px 0;
+      position: relative;
+    }
+    .moat-intro {
+      max-width: 680px;
+      margin-bottom: 72px;
+    }
+    .moat-heading {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 800;
+      font-size: clamp(40px, 5.5vw, 76px);
+      line-height: 0.92;
+      letter-spacing: -0.015em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .moat-heading .accent { color: var(--accent); }
+    .moat-sub {
+      font-size: 19px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+    .moat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--border);
+    }
+    .moat-card {
+      padding: 44px 36px 44px 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .moat-card:nth-child(odd) { padding-right: 56px; border-right: 1px solid var(--border); }
+    .moat-card:nth-child(even) { padding-left: 56px; }
+    .moat-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 18px;
+      display: block;
+    }
+    .moat-title {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -0.005em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .moat-body {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 440px;
+    }
+
+    /* HOW IT WORKS */
+    .how {
+      padding: 120px 0;
+      background: linear-gradient(180deg, var(--bg) 0%, #0E0E11 100%);
+      position: relative;
+    }
+    .how-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      gap: 40px; margin-bottom: 80px; flex-wrap: wrap;
+    }
+    .how-heading {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 800;
+      font-size: clamp(40px, 5.5vw, 76px);
+      line-height: 0.92;
+      letter-spacing: -0.015em;
+      text-transform: uppercase;
+    }
+    .how-flow {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .how-flow::before {
+      /* horizontal track line */
+      content: '';
+      position: absolute;
+      top: 42px;
+      left: 14%; right: 14%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(220,38,38,0.4) 20%, rgba(220,38,38,0.4) 80%, transparent 100%);
+    }
+    .step {
+      text-align: center;
+      padding: 0 24px;
+      position: relative;
+    }
+    .step-marker {
+      width: 84px; height: 84px;
+      margin: 0 auto 28px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid rgba(220,38,38,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 800;
+      font-size: 32px;
+      color: var(--accent);
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s;
+    }
+    .step:hover .step-marker {
+      background: var(--accent);
+      color: #fff;
+      transform: scale(1.05);
+      box-shadow: 0 0 0 6px rgba(220,38,38,0.08);
+    }
+    .step-title {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 700;
+      font-size: 26px;
+      text-transform: uppercase;
+      letter-spacing: -0.005em;
+      margin-bottom: 12px;
+    }
+    .step-body {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    /* CTA SECTION */
+    .cta-section {
+      padding: 120px 0;
+      background: var(--bg-cream);
+      color: var(--text-dark);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      top: -150px; left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(220,38,38,0.06), transparent 70%);
+      pointer-events: none;
+    }
+    .cta-heading {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 900;
+      font-size: clamp(44px, 7vw, 104px);
+      line-height: 0.92;
+      letter-spacing: -0.015em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      color: var(--text-dark);
+      position: relative;
+    }
+    .cta-heading .accent { color: var(--accent); }
+    .cta-sub {
+      font-size: 19px;
+      color: var(--text-dark-secondary);
+      max-width: 540px;
+      margin: 0 auto 44px;
+      line-height: 1.55;
+    }
+    .cta-large {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 36px;
+      background: var(--text-dark);
+      color: #fff;
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      border-radius: 14px;
+      transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
+    }
+    .cta-large:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 60px -20px rgba(0,0,0,0.4);
+    }
+    .cta-meta-dark {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-dark-secondary);
+      letter-spacing: 0.04em;
+      margin-top: 20px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg);
+      padding: 56px 0 32px;
+      border-top: 1px solid var(--border);
+    }
     .footer-row {
-      display: flex; flex-wrap: wrap; justify-content: space-between;
-      align-items: center; gap: 16px; font-size: 13px; color: var(--text-secondary);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
     }
+    .footer-brand { display: flex; align-items: center; gap: 14px; }
+    .footer-name {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+    }
+    .footer-name .ai { color: var(--accent); font-size: 13px; margin-left: 6px; letter-spacing: 0.16em; }
+    .footer-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+    }
+    .footer-links { display: flex; gap: 28px; }
     .footer-links a {
-      color: var(--text-secondary); text-decoration: none; margin-left: 20px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
     }
     .footer-links a:hover { color: var(--accent); }
-    @media (max-width: 600px) {
-      h1 { font-size: 34px; }
-      .tagline { font-size: 17px; }
-      .hero { padding: 24px 0; }
-      .footer-links a { margin-left: 0; margin-right: 16px; }
+
+    /* Scroll-triggered reveal — applies to sections after hero */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .container { padding: 0 22px; }
+      .hero { padding: 60px 0 80px; min-height: auto; }
+      .coach { padding: 80px 0; }
+      .coach-grid { grid-template-columns: 1fr; gap: 56px; }
+      .moat { padding: 80px 0; }
+      .moat-grid { grid-template-columns: 1fr; }
+      .moat-card { padding: 36px 0 !important; border-right: none !important; }
+      .moat-card:nth-child(odd) { padding-right: 0 !important; }
+      .moat-card:nth-child(even) { padding-left: 0 !important; }
+      .how { padding: 80px 0; }
+      .how-flow { grid-template-columns: 1fr; gap: 48px; }
+      .how-flow::before { display: none; }
+      .cta-section { padding: 80px 0; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .stat { padding: 24px 18px; }
+      .footer-row { flex-direction: column; align-items: flex-start; gap: 18px; }
+    }
+    @media (max-width: 520px) {
+      .stats { grid-template-columns: 1fr; }
+      .header-cta { display: none; }
+      .hero-cta-row { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
+
   <header>
     <div class="container">
-      <a href="/" class="wordmark">
-        <svg width="28" height="28" viewBox="0 0 84 84">
-          <rect width="84" height="84" rx="18" fill="var(--surface)"/>
-          <path d="M 14 62 L 14 22 L 26 44 L 38 22 L 38 62" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="26" cy="44" r="3.5" fill="#DC2626"/>
-          <path d="M 68 30 A 14 14 0 1 0 68 54" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round"/>
-          <text x="58" y="47" text-anchor="middle" font-family="system-ui" font-size="11" font-weight="600" fill="#DC2626">AI</text>
-        </svg>
-        <span class="name">Moto Coach</span>
-        <span class="ai">AI</span>
-      </a>
+      <div class="header-row">
+        <a href="/" class="wordmark">
+          <svg width="32" height="32" viewBox="0 0 84 84" aria-hidden="true">
+            <rect width="84" height="84" rx="18" fill="#16161A"/>
+            <path d="M 14 62 L 14 22 L 26 44 L 38 22 L 38 62" stroke="#FAFAF7" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="26" cy="44" r="3.5" fill="#DC2626"/>
+            <path d="M 68 30 A 14 14 0 1 0 68 54" stroke="#FAFAF7" stroke-width="6" fill="none" stroke-linecap="round"/>
+            <text x="58" y="47" text-anchor="middle" font-family="system-ui" font-size="11" font-weight="600" fill="#DC2626">AI</text>
+          </svg>
+          <span class="name">Moto Coach</span>
+          <span class="ai">AI</span>
+        </a>
+        <a href="#early" class="header-cta">Early Access</a>
+      </div>
     </div>
   </header>
 
-  <main>
-    <div class="container">
-      <div class="hero">
-        <svg class="logo-mark" viewBox="0 0 84 84">
-          <rect width="84" height="84" rx="18" fill="var(--surface)" stroke="var(--border)" stroke-width="0.5"/>
-          <path d="M 14 62 L 14 22 L 26 44 L 38 22 L 38 62" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="26" cy="44" r="3.5" fill="#DC2626"/>
-          <path d="M 68 30 A 14 14 0 1 0 68 54" stroke="currentColor" stroke-width="6" fill="none" stroke-linecap="round"/>
-          <text x="58" y="47" text-anchor="middle" font-family="system-ui" font-size="11" font-weight="600" fill="#DC2626">AI</text>
-        </svg>
-        <div class="eyebrow">Coming soon to iOS</div>
-        <h1>Upload a clip. Get coached.</h1>
-        <p class="tagline">AI-powered motocross coaching. Pick a short riding clip from your phone, and get instant feedback on your body position, balance, and lines — written like your coach was watching.</p>
-        <a href="#" class="cta disabled" aria-disabled="true">App Store launch coming</a>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-eyebrow"><span class="pulse"></span> Coming to iOS &middot; Q3 2026</div>
+      <h1>
+        <span class="line">Real Coaching.</span>
+        <span class="line"><span class="stroke">Pocket</span> <span class="accent">Sized.</span></span>
+      </h1>
+      <p class="hero-sub">
+        Most AI sports tools are built by engineers who Googled the sport. This one was trained by a real pro coach — same cueing language, same eye, same standards as a session at the track.
+      </p>
+      <div class="hero-cta-row">
+        <a href="#early" class="cta-primary">
+          Get notified at launch
+          <span class="arrow">→</span>
+        </a>
+        <span class="cta-meta">iOS &middot; private beta · Q3 2026</span>
       </div>
+    </div>
+  </section>
 
-      <section class="features">
-        <div class="section-label">What it does</div>
-        <h2>Real coaching, from real footage.</h2>
-        <div class="feature-grid">
-          <div class="feature">
-            <h3><span class="icon">●</span> See your scenario</h3>
-            <p>Corners, jumps, ruts, straights — the app reads your clip and identifies what you're riding through.</p>
-          </div>
-          <div class="feature">
-            <h3><span class="icon">●</span> Get your scores</h3>
-            <p>Body position, balance, and control rated on every clip, with a breakdown of where you're strongest and where to focus.</p>
-          </div>
-          <div class="feature">
-            <h3><span class="icon">●</span> Hear the coaching</h3>
-            <p>Phase-by-phase tips — entry, apex, exit — written in plain motocross language with the technique cues a coach would actually give.</p>
-          </div>
-          <div class="feature">
-            <h3><span class="icon">●</span> Practice with purpose</h3>
-            <p>Every session ends with a recommended drill so you know exactly what to work on next time you ride.</p>
+  <section class="coach reveal">
+    <div class="container">
+      <div class="coach-grid">
+        <div>
+          <div class="section-label">The Coach Behind the AI</div>
+          <h2 class="coach-heading">Trained by <em>28 years</em> of dirt.</h2>
+          <div class="coach-body">
+            <p>
+              Moto Coach AI isn't generic. The coaching model was built in close collaboration with a working professional motocross coach — racing since 1997, pro since 2009, still coaching riders at every level today.
+            </p>
+            <p>
+              Every cue, every score, every drill the app gives you traces back to language a real coach actually uses on the line. Not buzzwords. Not chatbot fluff. Real coaching, just packaged so it fits in your pocket.
+            </p>
           </div>
         </div>
-      </section>
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-num">28<span class="small">YR</span></span>
+            <div class="stat-label">On the bike</div>
+          </div>
+          <div class="stat">
+            <span class="stat-num">16<span class="small">YR</span></span>
+            <div class="stat-label">Pro level</div>
+          </div>
+          <div class="stat">
+            <span class="stat-num">1997</span>
+            <div class="stat-label">First race</div>
+          </div>
+          <div class="stat">
+            <span class="stat-num">2009</span>
+            <div class="stat-label">Pro since</div>
+          </div>
+        </div>
+      </div>
     </div>
-  </main>
+  </section>
+
+  <section class="moat reveal">
+    <div class="container">
+      <div class="moat-intro">
+        <div class="section-label">Why this works</div>
+        <h2 class="moat-heading">Not a chatbot. <span class="accent">A coach.</span></h2>
+        <p class="moat-sub">Generic AI sports tools tell you your form looks "good" or "needs work." Moto Coach AI tells you exactly what a pro would catch — phase by phase, in motocross terms, with a drill to fix it.</p>
+      </div>
+      <div class="moat-grid">
+        <div class="moat-card">
+          <span class="moat-num">01</span>
+          <h3 class="moat-title">Real Cueing Language</h3>
+          <p class="moat-body">Stacked elbows, inside leg high, attack position, weight forward through the chop. The model speaks the language of motocross — because that's how it was taught.</p>
+        </div>
+        <div class="moat-card">
+          <span class="moat-num">02</span>
+          <h3 class="moat-title">Phase-by-Phase Reads</h3>
+          <p class="moat-body">Corners break into entry, apex, and exit. Jumps break into approach, takeoff, and landing. You don't get one vague rating — you get a read on every phase.</p>
+        </div>
+        <div class="moat-card">
+          <span class="moat-num">03</span>
+          <h3 class="moat-title">Measured, Not Guessed</h3>
+          <p class="moat-body">Lean angle, body extension, leg position, recovery time — extracted from real frames. Numbers behind the call. So you can argue with it — and learn from it.</p>
+        </div>
+        <div class="moat-card">
+          <span class="moat-num">04</span>
+          <h3 class="moat-title">A Drill, Every Time</h3>
+          <p class="moat-body">Every session ends with a recommended drill targeted at the weakest phase. Show up to the track with something specific to fix — not "ride better."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how reveal">
+    <div class="container">
+      <div class="how-header">
+        <h2 class="how-heading">How it works.</h2>
+        <p class="moat-sub" style="max-width: 360px;">From clip to coaching in under a minute. No setup, no editing, no fuss.</p>
+      </div>
+      <div class="how-flow">
+        <div class="step">
+          <div class="step-marker">01</div>
+          <h3 class="step-title">Pick the clip</h3>
+          <p class="step-body">5 to 30 seconds. A corner, a jump, a rough section. Whatever you're working on.</p>
+        </div>
+        <div class="step">
+          <div class="step-marker">02</div>
+          <h3 class="step-title">AI reads the ride</h3>
+          <p class="step-body">Pose estimation extracts your body position, lean, and balance. Scenario detection figures out what you're riding through.</p>
+        </div>
+        <div class="step">
+          <div class="step-marker">03</div>
+          <h3 class="step-title">Get coached</h3>
+          <p class="step-body">Scores. Phase-by-phase notes. A drill for next time. Read it on the truck ride home.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="early">
+    <div class="container">
+      <h2 class="cta-heading">Get on the <span class="accent">launch list.</span></h2>
+      <p class="cta-sub">Limited beta seats. Real riders, real coaching, real feedback — the testers who join now shape what the v1 product becomes.</p>
+      <a href="mailto:support@motocoachai.app?subject=Notify%20me%20at%20launch&body=I'd%20like%20to%20be%20notified%20when%20Moto%20Coach%20AI%20launches.%0A%0AMy%20skill%20level%3A%0AHow%20I%20heard%20about%20it%3A%0A" class="cta-large">
+        Email to get notified
+        <span class="arrow">→</span>
+      </a>
+      <div class="cta-meta-dark">support@motocoachai.app · We reply.</div>
+    </div>
+  </section>
 
   <footer>
     <div class="container">
       <div class="footer-row">
-        <div>© 2026 Moto Coach AI</div>
+        <div class="footer-brand">
+          <svg width="24" height="24" viewBox="0 0 84 84" aria-hidden="true">
+            <rect width="84" height="84" rx="18" fill="#16161A"/>
+            <path d="M 14 62 L 14 22 L 26 44 L 38 22 L 38 62" stroke="#FAFAF7" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="26" cy="44" r="3.5" fill="#DC2626"/>
+            <path d="M 68 30 A 14 14 0 1 0 68 54" stroke="#FAFAF7" stroke-width="6" fill="none" stroke-linecap="round"/>
+            <text x="58" y="47" text-anchor="middle" font-family="system-ui" font-size="11" font-weight="600" fill="#DC2626">AI</text>
+          </svg>
+          <div>
+            <div class="footer-name">Moto Coach <span class="ai">AI</span></div>
+            <div class="footer-meta">© 2026 Moto Coach AI · All rights reserved</div>
+          </div>
+        </div>
         <div class="footer-links">
           <a href="/privacy">Privacy</a>
           <a href="/terms">Terms</a>
@@ -171,5 +713,19 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Scroll reveal — observer fires once per section
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+
 </body>
 </html>
