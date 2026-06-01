@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Moto Coach AI — Real Coaching. Pocket Sized.</title>
-  <meta name="description" content="AI motocross coaching trained on a real pro. 28 years on the bike. 16 as a pro. Upload a clip and get coached.">
+  <meta name="description" content="AI motocross coaching trained on a real pro. 28 years on the bike. 16 as a pro. Upload a clip and get coached — for $20/month instead of $150 a session.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 84'%3E%3Crect width='84' height='84' rx='18' fill='%23FAFAF7'/%3E%3Cpath d='M 14 62 L 14 22 L 26 44 L 38 22 L 38 62' stroke='%2318181B' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='26' cy='44' r='3.5' fill='%23DC2626'/%3E%3Cpath d='M 68 30 A 14 14 0 1 0 68 54' stroke='%2318181B' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3Ctext x='58' y='47' text-anchor='middle' font-family='system-ui' font-size='11' font-weight='600' fill='%23DC2626'%3EAI%3C/text%3E%3C/svg%3E">
 
-  <!-- Fonts: athletic display + clean body + telemetry mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -41,7 +40,6 @@
       overflow-x: hidden;
     }
 
-    /* Grain overlay — adds tactile atmosphere, breaks the "flat AI design" look */
     body::before {
       content: '';
       position: fixed;
@@ -89,7 +87,6 @@
       display: flex; align-items: center;
     }
     .hero::after {
-      /* atmospheric radial glow */
       content: '';
       position: absolute;
       width: 900px; height: 900px;
@@ -139,7 +136,7 @@
     .hero-sub {
       font-size: clamp(17px, 1.6vw, 21px);
       color: var(--text-secondary);
-      max-width: 580px;
+      max-width: 620px;
       margin: 0 0 44px;
       line-height: 1.55;
       animation: rise 0.85s 0.25s cubic-bezier(0.16,1,0.3,1) both;
@@ -271,10 +268,162 @@
       line-height: 1.4;
     }
 
-    /* MOAT — what makes this different */
-    .moat {
+    /* THE MATH — Pricing comparison section */
+    .math {
       background: var(--bg);
       padding: 120px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .math::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      bottom: -200px; left: -200px;
+      background: radial-gradient(closest-side, rgba(220,38,38,0.08), transparent 70%);
+      pointer-events: none;
+    }
+    .math-intro { max-width: 720px; margin-bottom: 64px; }
+    .math-heading {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 800;
+      font-size: clamp(40px, 5.5vw, 76px);
+      line-height: 0.92;
+      letter-spacing: -0.015em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .math-heading .accent { color: var(--accent); }
+    .math-sub {
+      font-size: 19px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      overflow: hidden;
+    }
+    .compare-col {
+      padding: 56px 44px;
+      background: var(--surface);
+      position: relative;
+      transition: background 0.4s;
+    }
+    .compare-col.you { background: linear-gradient(180deg, var(--surface) 0%, #14141A 100%); }
+    .compare-col.us { background: linear-gradient(180deg, #181820 0%, #1F1F28 100%); }
+    .compare-col.us::before {
+      content: 'YOU';
+      position: absolute;
+      top: 24px; right: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.22em;
+      padding: 5px 10px;
+      border: 1px solid rgba(220,38,38,0.4);
+      border-radius: 999px;
+      background: rgba(220,38,38,0.08);
+    }
+    .compare-col.you::before {
+      content: 'THE OLD WAY';
+      position: absolute;
+      top: 24px; right: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; font-weight: 600;
+      color: var(--text-tertiary);
+      letter-spacing: 0.22em;
+      padding: 5px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+    }
+    .compare-price {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 900;
+      font-size: clamp(68px, 9vw, 124px);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      margin-top: 36px;
+    }
+    .compare-price .currency {
+      font-size: 0.45em;
+      vertical-align: top;
+      color: var(--text-secondary);
+      margin-right: 4px;
+      font-weight: 700;
+    }
+    .compare-price .unit {
+      font-size: 0.32em;
+      color: var(--text-secondary);
+      margin-left: 4px;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+    .compare-col.us .compare-price { color: var(--accent); }
+    .compare-col.us .compare-price .currency { color: rgba(220,38,38,0.6); }
+    .compare-col.us .compare-price .unit { color: var(--text); }
+    .compare-tag {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: -0.005em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .compare-list { list-style: none; padding: 0; margin: 0; }
+    .compare-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 0;
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      border-top: 1px dashed var(--border);
+    }
+    .compare-list li:first-child { border-top: none; }
+    .compare-list .mark {
+      display: inline-block;
+      width: 16px; height: 16px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      position: relative;
+    }
+    .compare-list .mark::before {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 4px;
+    }
+    .compare-col.you .compare-list .mark::before {
+      background: var(--text-tertiary);
+      opacity: 0.4;
+    }
+    .compare-col.us .compare-list .mark::before {
+      background: var(--accent);
+    }
+    .compare-col.us .compare-list li { color: var(--text); }
+    .math-closer {
+      margin-top: 56px;
+      text-align: center;
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 700;
+      font-size: clamp(22px, 2.6vw, 32px);
+      letter-spacing: -0.005em;
+      line-height: 1.25;
+      color: var(--text);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .math-closer .accent { color: var(--accent); }
+
+    /* MOAT */
+    .moat {
+      background: var(--bg);
+      padding: 120px 0 100px;
       position: relative;
     }
     .moat-intro {
@@ -359,7 +508,6 @@
       position: relative;
     }
     .how-flow::before {
-      /* horizontal track line */
       content: '';
       position: absolute;
       top: 42px;
@@ -443,7 +591,7 @@
       font-size: 19px;
       color: var(--text-dark-secondary);
       max-width: 540px;
-      margin: 0 auto 44px;
+      margin: 0 auto 32px;
       line-height: 1.55;
     }
     .cta-large {
@@ -464,6 +612,40 @@
     .cta-large:hover {
       transform: translateY(-2px);
       box-shadow: 0 24px 60px -20px rgba(0,0,0,0.4);
+    }
+    .price-tease {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 28px;
+      padding: 12px 22px;
+      background: #fff;
+      border: 1px solid var(--border-cream);
+      border-radius: 999px;
+    }
+    .price-tease-amt {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: -0.005em;
+      color: var(--text-dark);
+      line-height: 1;
+    }
+    .price-tease-amt .accent { color: var(--accent); }
+    .price-tease-amt .small {
+      font-size: 0.6em;
+      color: var(--text-dark-secondary);
+      font-weight: 600;
+      margin-left: 2px;
+    }
+    .price-tease-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 600;
     }
     .cta-meta-dark {
       font-family: 'JetBrains Mono', monospace;
@@ -511,16 +693,17 @@
     }
     .footer-links a:hover { color: var(--accent); }
 
-    /* Scroll-triggered reveal — applies to sections after hero */
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
     .reveal.in { opacity: 1; transform: translateY(0); }
 
-    /* RESPONSIVE */
     @media (max-width: 900px) {
       .container { padding: 0 22px; }
       .hero { padding: 60px 0 80px; min-height: auto; }
       .coach { padding: 80px 0; }
       .coach-grid { grid-template-columns: 1fr; gap: 56px; }
+      .math { padding: 80px 0; }
+      .compare { grid-template-columns: 1fr; }
+      .compare-col { padding: 44px 32px; }
       .moat { padding: 80px 0; }
       .moat-grid { grid-template-columns: 1fr; }
       .moat-card { padding: 36px 0 !important; border-right: none !important; }
@@ -567,10 +750,10 @@
       <div class="hero-eyebrow"><span class="pulse"></span> Coming to iOS &middot; Q3 2026</div>
       <h1>
         <span class="line">Real Coaching.</span>
-        <span class="line"><span class="stroke">Pocket</span> <span class="accent">Sized.</span></span>
+        <span class="line"><span class="stroke">Every</span> <span class="accent">Ride.</span></span>
       </h1>
       <p class="hero-sub">
-        Most AI sports tools are built by engineers who Googled the sport. This one was trained by a real pro coach — same cueing language, same eye, same standards as a session at the track.
+        Most AI sports tools are built by engineers who Googled the sport. This one was trained by a real pro coach — so every rider has access to real coaching, every ride, no matter where they ride.
       </p>
       <div class="hero-cta-row">
         <a href="#early" class="cta-primary">
@@ -615,6 +798,41 @@
             <div class="stat-label">Pro since</div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="math reveal">
+    <div class="container">
+      <div class="math-intro">
+        <div class="section-label">The Math</div>
+        <h2 class="math-heading">A day at the track. <span class="accent">Or a month in your pocket.</span></h2>
+        <p class="math-sub">Real coaching used to mean writing a check every weekend. Now it's an app. Same eye on your riding. None of the cost or the calendar.</p>
+      </div>
+      <div class="compare">
+        <div class="compare-col you">
+          <div class="compare-price"><span class="currency">$</span>150<span class="unit">/SESSION</span></div>
+          <div class="compare-tag">A day at the track</div>
+          <ul class="compare-list">
+            <li><span class="mark"></span> One day. One set of eyes.</li>
+            <li><span class="mark"></span> About $600/month for weekly sessions.</li>
+            <li><span class="mark"></span> Limited to wherever the coach is.</li>
+            <li><span class="mark"></span> No replay, no notes after.</li>
+          </ul>
+        </div>
+        <div class="compare-col us">
+          <div class="compare-price"><span class="currency">$</span>20<span class="unit">/MONTH</span></div>
+          <div class="compare-tag">Moto Coach AI</div>
+          <ul class="compare-list">
+            <li><span class="mark"></span> Every ride. Every track. Every rider.</li>
+            <li><span class="mark"></span> Unlimited analyses. Cancel anytime.</li>
+            <li><span class="mark"></span> Works wherever you ride — globally.</li>
+            <li><span class="mark"></span> Saved sessions, scores, and drills.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="math-closer">
+        Most riders can't afford as much coaching as they want. <span class="accent">Now they don't have to.</span>
       </div>
     </div>
   </section>
@@ -679,8 +897,12 @@
 
   <section class="cta-section" id="early">
     <div class="container">
+      <div class="price-tease">
+        <div class="price-tease-amt"><span class="accent">$20</span><span class="small">/MO AT LAUNCH</span></div>
+        <div class="price-tease-meta">Founding rider pricing for beta supporters</div>
+      </div>
       <h2 class="cta-heading">Get on the <span class="accent">launch list.</span></h2>
-      <p class="cta-sub">Limited beta seats. Real riders, real coaching, real feedback — the testers who join now shape what the v1 product becomes.</p>
+      <p class="cta-sub">Limited beta seats. Real riders, real coaching, real feedback — the testers who join now shape what the v1 product becomes, and lock in founding-rider pricing.</p>
       <a href="mailto:support@motocoachai.app?subject=Notify%20me%20at%20launch&body=I'd%20like%20to%20be%20notified%20when%20Moto%20Coach%20AI%20launches.%0A%0AMy%20skill%20level%3A%0AHow%20I%20heard%20about%20it%3A%0A" class="cta-large">
         Email to get notified
         <span class="arrow">→</span>
@@ -715,7 +937,6 @@
   </footer>
 
   <script>
-    // Scroll reveal — observer fires once per section
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach(e => {
