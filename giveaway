@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Win a 2026 Beta 450 RX — Moto Coach AI Giveaway</title>
+  <meta name="description" content="Every annual Moto Coach AI subscriber is entered to win a brand-new 2026 Beta 450 RX. No purchase necessary — free mail-in entry available. Drawing December 12, 2026.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 84'%3E%3Crect width='84' height='84' rx='18' fill='%23FAFAF7'/%3E%3Cpath d='M 14 62 L 14 22 L 26 44 L 38 22 L 38 62' stroke='%2318181B' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='26' cy='44' r='3.5' fill='%23DC2626'/%3E%3Cpath d='M 68 30 A 14 14 0 1 0 68 54' stroke='%2318181B' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3Ctext x='58' y='47' text-anchor='middle' font-family='system-ui' font-size='11' font-weight='600' fill='%23DC2626'%3EAI%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0B0B0D;
+      --bg-cream: #FAFAF7;
+      --surface: #16161A;
+      --surface-elev: #1E1E22;
+      --border: rgba(255,255,255,0.08);
+      --border-cream: #E4E4DD;
+      --text: #FAFAF7;
+      --text-secondary: #A8A8A2;
+      --text-tertiary: #6B6B66;
+      --text-dark: #18181B;
+      --text-dark-secondary: #52525B;
+      --accent: #DC2626;
+      --accent-warm: #F97316;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .display { font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; letter-spacing: -0.01em; line-height: 0.92; }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; width: 100%; position: relative; z-index: 2; }
+
+    /* Header (matches homepage) */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(11, 11, 13, 0.78);
+      backdrop-filter: saturate(140%) blur(14px);
+      -webkit-backdrop-filter: saturate(140%) blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-row { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+    .wordmark { display: inline-flex; align-items: baseline; gap: 8px; text-decoration: none; color: var(--text); }
+    .wordmark .name { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+    .wordmark .ai { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 0.18em; }
+    .header-cta {
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--text-secondary); text-decoration: none;
+      padding: 8px 14px; border: 1px solid var(--border); border-radius: 999px;
+      transition: all 0.25s;
+    }
+    .header-cta:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+    .nav-wrap { display: flex; align-items: center; gap: 16px; }
+    .nav-menu { position: relative; }
+    .nav-toggle {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: none; border: 1px solid var(--border); border-radius: 999px;
+      color: var(--text-secondary); cursor: pointer;
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      padding: 8px 14px; transition: all 0.25s;
+    }
+    .nav-toggle:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+    .nav-toggle .chev { transition: transform 0.25s; font-size: 9px; }
+    .nav-menu.open .nav-toggle .chev { transform: rotate(180deg); }
+    .nav-dropdown {
+      position: absolute; top: calc(100% + 10px); right: 0;
+      min-width: 200px;
+      background: var(--surface-elev);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 8px;
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: all 0.22s cubic-bezier(0.16,1,0.3,1);
+      box-shadow: 0 20px 50px -12px rgba(0,0,0,0.6);
+    }
+    .nav-menu.open .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-dropdown a {
+      display: block; padding: 11px 14px;
+      color: var(--text-secondary); text-decoration: none;
+      font-size: 14px; font-weight: 500; border-radius: 9px;
+      transition: all 0.18s;
+    }
+    .nav-dropdown a:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+    .nav-dropdown a.giveaway { color: var(--accent); font-weight: 600; }
+    .nav-dropdown a.giveaway:hover { background: rgba(220,38,38,0.1); }
+
+    /* HERO */
+    .g-hero { padding: 72px 0 60px; position: relative; overflow: hidden; }
+    .g-hero::after {
+      content: ''; position: absolute;
+      width: 800px; height: 800px; top: -200px; right: -300px;
+      background: radial-gradient(closest-side, rgba(220,38,38,0.12), transparent 75%);
+      pointer-events: none;
+    }
+    .g-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .g-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.18em;
+      color: var(--accent);
+      padding: 7px 13px;
+      border: 1px solid rgba(220,38,38,0.35);
+      border-radius: 999px; background: rgba(220,38,38,0.06);
+      margin-bottom: 24px;
+    }
+    .g-eyebrow .pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); animation: pulse 2.4s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1);} 50% { opacity: .4; transform: scale(.7);} }
+    .g-hero h1 {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 900;
+      font-size: clamp(46px, 7vw, 104px);
+      line-height: 0.88; letter-spacing: -0.015em;
+      text-transform: uppercase; margin-bottom: 22px;
+    }
+    .g-hero h1 .accent { color: var(--accent); }
+    .g-hero-sub { font-size: clamp(16px, 1.5vw, 19px); color: var(--text-secondary); max-width: 520px; margin-bottom: 32px; line-height: 1.55; }
+    .g-cta-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+    .cta-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 26px; background: var(--accent); color: #fff;
+      font-family: 'Manrope', sans-serif; font-size: 15px; font-weight: 700;
+      text-decoration: none; border-radius: 12px;
+      transition: all 0.25s cubic-bezier(0.16,1,0.3,1); border: 1px solid var(--accent);
+    }
+    .cta-primary:hover { background: #ef4444; transform: translateY(-1px); box-shadow: 0 16px 40px -12px rgba(220,38,38,0.5); }
+    .cta-primary .arrow { transition: transform 0.25s; }
+    .cta-primary:hover .arrow { transform: translateX(3px); }
+    .cta-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 16px 24px; color: var(--text-secondary);
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      border: 1px solid var(--border); border-radius: 12px; transition: all 0.25s;
+    }
+    .cta-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+
+    /* Prize photo */
+    .prize-photo {
+      position: relative; border-radius: 22px; overflow: hidden;
+      border: 1px solid var(--border); background: #EDEDE6; aspect-ratio: 4/5;
+    }
+    .prize-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .prize-badge {
+      position: absolute; top: 16px; left: 16px; z-index: 2;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em;
+      color: #fff; background: var(--accent); padding: 6px 12px; border-radius: 999px;
+    }
+
+    /* Key facts strip */
+    .facts { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--surface); }
+    .facts-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .fact { padding: 32px 28px; border-right: 1px solid var(--border); }
+    .fact:last-child { border-right: none; }
+    .fact-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--accent); margin-bottom: 10px; }
+    .fact-value { font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 26px; line-height: 1.05; color: var(--text); }
+    .fact-note { font-size: 12px; color: var(--text-tertiary); margin-top: 6px; }
+
+    /* Section shell */
+    .section { padding: 88px 0; }
+    .section-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+    .section-label::before { content: ''; display: inline-block; width: 22px; height: 1px; background: var(--accent); }
+    .section-h { font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: clamp(34px, 4.5vw, 60px); line-height: 0.94; letter-spacing: -0.015em; text-transform: uppercase; margin-bottom: 20px; }
+    .section-h .accent { color: var(--accent); }
+
+    /* How to enter cards */
+    .enter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+    .enter-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 36px 32px; position: relative; }
+    .enter-card.free { border-color: rgba(220,38,38,0.3); }
+    .enter-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--accent); margin-bottom: 16px; }
+    .enter-title { font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 30px; text-transform: uppercase; margin-bottom: 8px; letter-spacing: -0.01em; }
+    .enter-body { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+    .enter-body strong { color: var(--text); }
+    .enter-addr { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text); background: var(--bg); border: 1px dashed var(--border); border-radius: 10px; padding: 16px; margin-top: 16px; line-height: 1.7; }
+    .equal-note { text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-secondary); margin-top: 24px; letter-spacing: 0.02em; }
+
+    /* Summary bullets */
+    .summary-list { list-style: none; margin-top: 32px; display: grid; gap: 2px; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .summary-list li { display: flex; gap: 16px; padding: 20px 24px; background: var(--surface); font-size: 15px; color: var(--text-secondary); align-items: baseline; }
+    .summary-list li strong { color: var(--text); min-width: 130px; display: inline-block; font-weight: 600; }
+
+    /* Rules block */
+    .rules { background: var(--bg-cream); color: var(--text-dark); }
+    .rules .section-h { color: var(--text-dark); }
+    .rules-doc { max-width: 820px; }
+    .rules-doc h3 { font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: 22px; text-transform: uppercase; letter-spacing: -0.005em; color: var(--text-dark); margin: 36px 0 12px; }
+    .rules-doc h3:first-child { margin-top: 0; }
+    .rules-doc p { font-size: 15px; line-height: 1.7; color: var(--text-dark-secondary); margin-bottom: 12px; }
+    .rules-doc strong { color: var(--text-dark); }
+    .rules-doc .allcaps { font-weight: 700; color: var(--text-dark); }
+    .rules-addr { font-family: 'JetBrains Mono', monospace; font-size: 14px; background: #fff; border: 1px solid var(--border-cream); border-radius: 10px; padding: 16px 18px; margin: 8px 0 16px; line-height: 1.7; color: var(--text-dark); }
+    .placeholder { background: rgba(220,38,38,0.12); color: var(--accent); padding: 1px 6px; border-radius: 4px; font-weight: 600; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); padding: 48px 0; }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .footer-brand { display: flex; align-items: center; gap: 14px; }
+    .footer-name { font-size: 15px; font-weight: 700; }
+    .footer-name .ai { color: var(--accent); font-size: 10px; letter-spacing: 0.18em; margin-left: 3px; }
+    .footer-meta { font-size: 12px; color: var(--text-tertiary); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+
+    @media (max-width: 860px) {
+      .g-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .g-hero { padding: 48px 0 40px; }
+      .facts-grid { grid-template-columns: repeat(2, 1fr); }
+      .fact:nth-child(2) { border-right: none; }
+      .fact:nth-child(1), .fact:nth-child(2) { border-bottom: 1px solid var(--border); }
+      .enter-grid { grid-template-columns: 1fr; }
+      .section { padding: 60px 0; }
+    }
+    @media (max-width: 480px) {
+      .facts-grid { grid-template-columns: 1fr; }
+      .fact { border-right: none; border-bottom: 1px solid var(--border); }
+      .fact:last-child { border-bottom: none; }
+      .summary-list li { flex-direction: column; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <div class="header-row">
+        <a href="/" class="wordmark">
+          <span class="name">Moto Coach</span>
+          <span class="ai">AI</span>
+        </a>
+        <div class="nav-wrap">
+          <div class="nav-menu" id="navMenu">
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-haspopup="true">
+              Menu <span class="chev">▼</span>
+            </button>
+            <div class="nav-dropdown">
+              <a href="/">Home</a>
+              <a href="/#how">How It Works</a>
+              <a href="/#pricing">Pricing</a>
+              <a href="/giveaway" class="giveaway">Giveaway 🏍️</a>
+              <a href="https://apps.apple.com/us/app/moto-coach-ai/id6777779336">Download</a>
+              <a href="mailto:support@motocoachai.app">Support</a>
+            </div>
+          </div>
+          <a href="https://apps.apple.com/us/app/moto-coach-ai/id6777779336" class="header-cta">Download</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="g-hero">
+    <div class="container g-hero-grid">
+      <div>
+        <div class="g-eyebrow"><span class="pulse"></span> The Giveaway</div>
+        <h1>Win a <span class="accent">2026 Beta 450 RX.</span></h1>
+        <p class="g-hero-sub">
+          We're giving away a brand-new 2026 Beta 450 RX. Every annual Moto Coach AI subscriber is automatically entered to win. One winner, drawn December 12, 2026.
+        </p>
+        <div class="g-cta-row">
+          <a href="https://apps.apple.com/us/app/moto-coach-ai/id6777779336" class="cta-primary">
+            Subscribe &amp; enter
+            <span class="arrow">→</span>
+          </a>
+          <a href="#rules" class="cta-ghost">Official rules</a>
+        </div>
+      </div>
+      <div class="prize-photo">
+        <span class="prize-badge">ARV $10,990</span>
+        <img src="/images/beta-450rx.png" alt="2026 Beta 450 RX dirt bike — giveaway prize">
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY FACTS -->
+  <section class="facts">
+    <div class="container">
+      <div class="facts-grid">
+        <div class="fact">
+          <div class="fact-label">The Prize</div>
+          <div class="fact-value">2026 Beta 450 RX</div>
+          <div class="fact-note">Approx. retail value $10,990</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">How To Enter</div>
+          <div class="fact-value">Annual<br>Subscription</div>
+          <div class="fact-note">No purchase necessary — see rules</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Entries Close</div>
+          <div class="fact-value">Dec 5, 2026</div>
+          <div class="fact-note">11:59 PM Pacific</div>
+        </div>
+        <div class="fact">
+          <div class="fact-label">Drawing</div>
+          <div class="fact-value">Dec 12, 2026</div>
+          <div class="fact-note">One winner, at random</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO ENTER -->
+  <section class="section" id="enter">
+    <div class="container">
+      <div class="section-label">How To Enter</div>
+      <h2 class="section-h">Subscribe. <span class="accent">You're in.</span></h2>
+      <p class="g-hero-sub" style="max-width:640px;">
+        Buy a paid <strong style="color:var(--text);">annual</strong> subscription to Moto Coach AI during the entry period and you're automatically entered to win — one entry, nothing else to do. Only annual subscriptions earn an entry; monthly, free, and trial plans don't.
+      </p>
+      <div class="g-cta-row" style="margin-top:32px;">
+        <a href="https://apps.apple.com/us/app/moto-coach-ai/id6777779336" class="cta-primary">
+          Get an annual subscription
+          <span class="arrow">→</span>
+        </a>
+      </div>
+      <p class="equal-note" style="text-align:left; margin-top:28px;">No purchase or payment is necessary to enter or win, and a purchase will not improve your chances of winning. See the Official Rules below for entry details.</p>
+    </div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="section-label">The Short Version</div>
+      <h2 class="section-h">The giveaway at a glance.</h2>
+      <ul class="summary-list">
+        <li><strong>Prize</strong> One (1) brand-new 2026 Beta 450 RX. Approximate retail value $10,990. One winner.</li>
+        <li><strong>Who can enter</strong> US residents 18+ (or age of majority in your state). Void in NY, FL &amp; RI, and where prohibited.</li>
+        <li><strong>Entry period</strong> Opens August 12, 2026 and closes December 5, 2026 at 11:59 PM Pacific.</li>
+        <li><strong>Drawing</strong> On or about December 12, 2026. Winner picked at random and notified by email/phone.</li>
+        <li><strong>Taxes</strong> The winner is responsible for all taxes, will complete a W-9, and will receive a 1099 for the prize value. Winner also covers title, registration, insurance &amp; pickup.</li>
+      </ul>
+      <p class="equal-note" style="margin-top:20px;">The full Official Rules below control in all cases.</p>
+    </div>
+  </section>
+
+  <!-- FULL RULES -->
+  <section class="section rules" id="rules">
+    <div class="container">
+      <div class="section-label">The Fine Print</div>
+      <h2 class="section-h">Official Rules.</h2>
+      <div class="rules-doc">
+        <p class="allcaps">NO PURCHASE OR PAYMENT OF ANY KIND IS NECESSARY TO ENTER OR WIN. A PURCHASE OR PAYMENT WILL NOT IMPROVE YOUR CHANCES OF WINNING. VOID WHERE PROHIBITED.</p>
+
+        <h3>1. Sponsor</h3>
+        <p>The Moto Coach AI Dirt Bike Giveaway (the "Promotion") is sponsored by <strong>Moto Coach AI</strong>, a California corporation, located at <span class="placeholder">[BUSINESS ADDRESS / P.O. BOX]</span> ("Sponsor").</p>
+
+        <h3>2. Eligibility</h3>
+        <p>The Promotion is open only to legal residents of the fifty (50) United States and the District of Columbia who are the legal age of majority in their state of residence at the time of entry. <strong>The Promotion is VOID in New York, Florida, and Rhode Island, and wherever else prohibited or restricted by law.</strong> Employees, officers, and directors of Sponsor, and their immediate family and household members, are not eligible.</p>
+
+        <h3>3. Promotion Period</h3>
+        <p>The Promotion begins on <strong>August 12, 2026 at 5:00:00 p.m. Pacific Time</strong> and ends on <strong>December 5, 2026 at 11:59:59 p.m. Pacific Time</strong> (the "Promotion Period"). Entries submitted before or after the Promotion Period will not be eligible.</p>
+
+        <h3>4. How to Enter</h3>
+        <p>There are two (2) ways to enter. <strong>Both methods have an equal chance of winning. Purchasing a subscription does not improve your odds.</strong></p>
+        <p><strong>(a) Subscription Entry.</strong> During the Promotion Period, purchase a paid annual subscription to Moto Coach AI. You will automatically receive one (1) entry. Only paid annual subscriptions qualify for a Subscription Entry; monthly, free, and trial subscriptions do not earn an entry by this method (though anyone may still enter free under (b)). Retain your subscription confirmation as proof of purchase.</p>
+        <p><strong>(b) Free (No-Purchase) Mail-In Entry.</strong> During the Promotion Period, hand-print your full name, complete street address, daytime telephone number, email address, and date of birth on a standard 4" x 6" card and mail it in a stamped envelope to:</p>
+        <div class="rules-addr">
+          Moto Coach AI Dirt Bike Giveaway<br>
+          <span class="placeholder">[P.O. BOX]</span><br>
+          <span class="placeholder">[CITY, STATE ZIP]</span>
+        </div>
+        <p>Each valid mail-in entry receives one (1) entry, equal to a Subscription Entry. Mail-in entries must be postmarked no later than <strong>December 5, 2026</strong> and received no later than <strong>December 11, 2026</strong>. Limit one (1) free entry per outer envelope. Mechanically reproduced entries are not permitted.</p>
+
+        <h3>5. Entry Limits</h3>
+        <p>One entry per annual subscription purchased and one per valid mail-in card. <span class="placeholder">[Confirm any total cap per person with counsel.]</span> Any attempt to exceed the stated limit, or use of bots, scripts, or multiple identities, voids all of that person's entries.</p>
+
+        <h3>6. Prize</h3>
+        <p>One (1) Grand Prize: a brand-new <strong>2026 Beta 450 RX</strong> dirt bike. Approximate Retail Value ("ARV"): <strong>$10,990</strong>. Only one (1) prize will be awarded. The prize is awarded "as is" with no warranty except any manufacturer's warranty. No substitution, transfer, or cash equivalent except at Sponsor's sole discretion; Sponsor may substitute a prize of equal or greater value if the advertised prize becomes unavailable. Winner is responsible for all costs not expressly stated as included, including title, registration, licensing, insurance, delivery or pickup, taxes, and safety gear. The bike's manufacturer does not sponsor, endorse, or administer this Promotion.</p>
+
+        <h3>7. Winner Selection &amp; Notification</h3>
+        <p>On or about <strong>December 12, 2026</strong>, one (1) winner will be selected in a random drawing from all eligible entries received during the Promotion Period. Odds depend on the total number of eligible entries received. The potential winner will be notified by email and/or phone and may be required to sign and return an Affidavit of Eligibility, a Liability Release, and (where lawful) a Publicity Release, and to complete tax documentation, within <span class="placeholder">[e.g. seven (7)]</span> days of notification. If the potential winner cannot be reached, fails to respond, is ineligible, or fails to return required documents, the prize may be forfeited and an alternate winner selected.</p>
+
+        <h3>8. Taxes</h3>
+        <p><strong>All federal, state, and local taxes on the prize are the sole responsibility of the winner.</strong> Because the ARV exceeds $600, Sponsor will require the winner to complete an IRS Form W-9 and will issue an IRS Form 1099 reporting the ARV of the prize. Sponsor will not release the prize until required tax documentation is received.</p>
+
+        <h3>9. General Conditions</h3>
+        <p>Sponsor may disqualify any entrant who tampers with the entry process or violates these rules. If the Promotion is compromised by fraud, technical failure, or any cause beyond Sponsor's reasonable control, Sponsor may modify, suspend, or terminate it and award the prize from eligible entries received up to that point, subject to any approvals required by law.</p>
+
+        <h3>10. Release &amp; Limitation of Liability</h3>
+        <p>By entering, each entrant releases Sponsor and its officers, employees, and agents from any liability for any loss, injury, or damage arising from participation in the Promotion or the acceptance, use, or misuse of the prize, to the fullest extent permitted by law. <span class="placeholder">[Have counsel draft a robust assumption-of-risk / release for the winner to sign — riding carries real injury risk.]</span></p>
+
+        <h3>11. Winner List</h3>
+        <p>For the winner's name, send a stamped, self-addressed envelope to the address in Section 1 within sixty (60) days after the Promotion Period ends.</p>
+
+        <h3>12. Governing Law</h3>
+        <p>This Promotion is governed by the laws of the State of <strong>California</strong>. <span class="placeholder">[Because the ARV exceeds $5,000, confirm NY/FL/RI are properly excluded or registered before launch — this template excludes them in Section 2.]</span></p>
+
+        <h3>13. Privacy</h3>
+        <p>Information collected from entrants is subject to Sponsor's <a href="/privacy">Privacy Policy</a> and will be used to administer the Promotion and, where the entrant consents, for marketing. Opting out of marketing does not affect an entrant's chance of winning.</p>
+
+        <h3>14. Platform Disclaimer</h3>
+        <p>This Promotion is not sponsored, endorsed, administered by, or associated with Apple, Instagram, Meta, TikTok, or any other platform.</p>
+
+        <p style="margin-top:32px; font-size:13px; color:var(--text-tertiary);"><em>Highlighted fields must be completed, and these rules reviewed by a licensed attorney, before the Promotion goes live.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <div class="footer-brand">
+          <div>
+            <div class="footer-name">Moto Coach <span class="ai">AI</span></div>
+            <div class="footer-meta">© 2026 Moto Coach AI · All rights reserved</div>
+          </div>
+        </div>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/giveaway">Giveaway</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="mailto:support@motocoachai.app">Support</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navMenu = document.getElementById('navMenu');
+    const navToggle = document.getElementById('navToggle');
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = navMenu.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', (e) => {
+      if (!navMenu.contains(e.target)) {
+        navMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    navMenu.querySelectorAll('.nav-dropdown a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+</body>
+</html>
