@@ -189,6 +189,11 @@
     .enter-body strong { color: var(--text); }
     .enter-addr { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text); background: var(--bg); border: 1px dashed var(--border); border-radius: 10px; padding: 16px; margin-top: 16px; line-height: 1.7; }
     .equal-note { text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-secondary); margin-top: 24px; letter-spacing: 0.02em; }
+    .confirm-box { margin-top: 32px; background: var(--surface); border: 1px solid rgba(220,38,38,0.3); border-radius: 16px; padding: 28px 30px; max-width: 660px; }
+    .confirm-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--accent); margin-bottom: 12px; }
+    .confirm-body { font-size: 15px; line-height: 1.65; color: var(--text-secondary); }
+    .confirm-body a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .confirm-body a:hover { text-decoration: underline; }
 
     /* Summary bullets */
     .summary-list { list-style: none; margin-top: 32px; display: grid; gap: 2px; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
@@ -330,6 +335,16 @@
           <span class="arrow">→</span>
         </a>
       </div>
+
+      <div class="confirm-box">
+        <div class="confirm-tag">One quick step to confirm</div>
+        <p class="confirm-body">
+          Your entry is recorded automatically when you subscribe. To make sure we can identify and reach you if you win, email a screenshot of your annual purchase confirmation to
+          <a href="mailto:support@motocoachai.app?subject=Giveaway%20Entry%20Confirmation">support@motocoachai.app</a>
+          with your name. That's how we match your entry to a real person for the live drawing.
+        </p>
+      </div>
+
       <p class="equal-note" style="text-align:left; margin-top:28px;">No purchase or payment is necessary to enter or win, and a purchase will not improve your chances of winning. See the Official Rules below for entry details.</p>
     </div>
   </section>
@@ -369,7 +384,7 @@
 
         <h3>4. How to Enter</h3>
         <p>There are two (2) ways to enter. <strong>Both methods have an equal chance of winning. Purchasing a subscription does not improve your odds.</strong></p>
-        <p><strong>(a) Subscription Entry.</strong> During the Promotion Period, purchase a paid annual subscription to Moto Coach AI. You will automatically receive one (1) entry. Only paid annual subscriptions qualify for a Subscription Entry; monthly, free, and trial subscriptions do not earn an entry by this method (though anyone may still enter free under (b)). Retain your subscription confirmation as proof of purchase.</p>
+        <p><strong>(a) Subscription Entry.</strong> During the Promotion Period, purchase a paid annual subscription to Moto Coach AI. You will automatically receive one (1) entry. Only paid annual subscriptions qualify for a Subscription Entry; monthly, free, and trial subscriptions do not earn an entry by this method (though anyone may still enter free under (b)). Retain your subscription confirmation as proof of purchase. To help Sponsor identify and contact you in the event you win, entrants are encouraged (but not required) to email a screenshot of their annual purchase confirmation, along with their full name, to support@motocoachai.app. Providing this information is optional and does not affect your entry or your chances of winning.</p>
         <p><strong>(b) Free (No-Purchase) Mail-In Entry.</strong> During the Promotion Period, hand-print your full name, complete street address, daytime telephone number, email address, and date of birth on a standard 4" x 6" card and mail it in a stamped envelope to:</p>
         <div class="rules-addr">
           Moto Coach AI Dirt Bike Giveaway<br>
