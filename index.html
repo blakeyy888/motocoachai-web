@@ -78,6 +78,47 @@
     }
     .header-cta:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
 
+    /* Dropdown nav */
+    .nav-wrap { display: flex; align-items: center; gap: 16px; }
+    .nav-menu { position: relative; }
+    .nav-toggle {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: none; border: 1px solid var(--border); border-radius: 999px;
+      color: var(--text-secondary); cursor: pointer;
+      font-family: 'Manrope', sans-serif;
+      font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      padding: 8px 14px;
+      transition: all 0.25s;
+    }
+    .nav-toggle:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+    .nav-toggle .chev { transition: transform 0.25s; font-size: 9px; }
+    .nav-menu.open .nav-toggle .chev { transform: rotate(180deg); }
+    .nav-dropdown {
+      position: absolute; top: calc(100% + 10px); right: 0;
+      min-width: 200px;
+      background: var(--surface-elev);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 8px;
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: all 0.22s cubic-bezier(0.16,1,0.3,1);
+      box-shadow: 0 20px 50px -12px rgba(0,0,0,0.6);
+    }
+    .nav-menu.open .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-dropdown a {
+      display: block;
+      padding: 11px 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px; font-weight: 500;
+      border-radius: 9px;
+      transition: all 0.18s;
+    }
+    .nav-dropdown a:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+    .nav-dropdown a.giveaway { color: var(--accent); font-weight: 600; }
+    .nav-dropdown a.giveaway:hover { background: rgba(220,38,38,0.1); }
+
     /* HERO */
     .hero {
       padding: 88px 0 120px;
@@ -375,6 +416,14 @@
       text-transform: uppercase;
       margin-bottom: 20px;
     }
+    .compare-annual {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 22px;
+      letter-spacing: 0.02em;
+    }
+    .compare-col.us .compare-annual strong { color: var(--accent); font-weight: 600; }
     .compare-list { list-style: none; padding: 0; margin: 0; }
     .compare-list li {
       display: flex; align-items: flex-start; gap: 10px;
@@ -693,6 +742,93 @@
     }
     .footer-links a:hover { color: var(--accent); }
 
+    /* GIVEAWAY banner */
+    .giveaway-band {
+      background: var(--bg-cream);
+      color: var(--text-dark);
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .giveaway-band::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    .giveaway-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .giveaway-copy .section-label { color: var(--accent); }
+    .giveaway-heading {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 900;
+      font-size: clamp(40px, 6vw, 82px);
+      line-height: 0.9;
+      letter-spacing: -0.015em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      margin-bottom: 22px;
+    }
+    .giveaway-heading .accent { color: var(--accent); }
+    .giveaway-sub {
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--text-dark-secondary);
+      max-width: 480px;
+      margin-bottom: 20px;
+    }
+    .giveaway-note {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-dark-secondary);
+      letter-spacing: 0.02em;
+      margin-bottom: 32px;
+    }
+    .giveaway-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 28px;
+      background: var(--accent); color: #fff;
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px; font-weight: 700;
+      text-decoration: none; border-radius: 12px;
+      transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
+      border: 1px solid var(--accent);
+    }
+    .giveaway-cta:hover { background: #ef4444; transform: translateY(-1px); box-shadow: 0 16px 40px -12px rgba(220,38,38,0.5); }
+    .giveaway-cta .arrow { transition: transform 0.25s; }
+    .giveaway-cta:hover .arrow { transform: translateX(3px); }
+    .giveaway-photo {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border-cream);
+      background: #EDEDE6;
+      aspect-ratio: 4 / 5;
+    }
+    .giveaway-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .giveaway-photo .ph {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 10px;
+      color: var(--text-dark-secondary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; text-align: center; padding: 20px;
+    }
+    .giveaway-badge {
+      position: absolute; top: 16px; left: 16px; z-index: 2;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.18em;
+      color: #fff; background: var(--accent);
+      padding: 6px 12px; border-radius: 999px;
+    }
+    @media (max-width: 760px) {
+      .giveaway-grid { grid-template-columns: 1fr; gap: 36px; }
+    }
+
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
     .reveal.in { opacity: 1; transform: translateY(0); }
 
@@ -889,14 +1025,29 @@
           <span class="name">Moto Coach</span>
           <span class="ai">AI</span>
         </a>
-        <a href="#early" class="header-cta">Early Access</a>
+        <div class="nav-wrap">
+          <div class="nav-menu" id="navMenu">
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-haspopup="true">
+              Menu <span class="chev">▼</span>
+            </button>
+            <div class="nav-dropdown">
+              <a href="#top">Home</a>
+              <a href="#how">How It Works</a>
+              <a href="#pricing">Pricing</a>
+              <a href="/giveaway" class="giveaway">Giveaway 🏍️</a>
+              <a href="https://apps.apple.com/us/app/moto-coach-ai/id6777779336">Download</a>
+              <a href="mailto:support@motocoachai.app">Support</a>
+            </div>
+          </div>
+          <a href="https://apps.apple.com/us/app/moto-coach-ai/id6777779336" class="header-cta">Download</a>
+        </div>
       </div>
     </div>
   </header>
 
-  <section class="hero">
+  <section class="hero" id="top">
     <div class="container hero-grid">
-      <div class="hero-eyebrow"><span class="pulse"></span> Coming Soon to iOS</div>
+      <div class="hero-eyebrow"><span class="pulse"></span> Now on the App Store</div>
       <h1>
         <span class="line">Real Coaching.</span>
         <span class="line"><span class="stroke">Every</span> <span class="accent">Ride.</span></span>
@@ -905,11 +1056,11 @@
         Most AI sports tools are built by engineers who Googled the sport. This one was trained by a real pro coach — so every rider has access to real coaching, every ride, no matter where they ride.
       </p>
       <div class="hero-cta-row">
-        <a href="#early" class="cta-primary">
-          Get notified at launch
+        <a href="https://apps.apple.com/us/app/moto-coach-ai/id6777779336" class="cta-primary">
+          Download on the App Store
           <span class="arrow">→</span>
         </a>
-        <span class="cta-meta">iOS &middot; coming soon</span>
+        <span class="cta-meta">iOS &middot; Available now</span>
       </div>
     </div>
   </section>
@@ -951,7 +1102,7 @@
     </div>
   </section>
 
-  <section class="math reveal">
+  <section class="math reveal" id="pricing">
     <div class="container">
       <div class="math-intro">
         <div class="section-label">The Math</div>
@@ -971,6 +1122,7 @@
         </div>
         <div class="compare-col us">
           <div class="compare-price"><span class="currency">$</span>24.99<span class="unit">/MONTH</span></div>
+          <div class="compare-annual">or <strong>$249.99/year</strong> &middot; saves ~$50</div>
           <div class="compare-tag">Moto Coach AI</div>
           <ul class="compare-list">
             <li><span class="mark"></span> Every ride. Every track. Every rider.</li>
@@ -1018,7 +1170,7 @@
     </div>
   </section>
 
-  <section class="how reveal">
+  <section class="how reveal" id="how">
     <div class="container">
       <div class="how-header">
         <h2 class="how-heading">How it works.</h2>
@@ -1047,16 +1199,39 @@
   <section class="cta-section" id="early">
     <div class="container">
       <div class="price-tease">
-        <div class="price-tease-amt"><span class="accent">$24.99</span><span class="small">/MO AT LAUNCH</span></div>
-        <div class="price-tease-meta">One price. Unlimited coaching.</div>
+        <div class="price-tease-amt"><span class="accent">$24.99</span><span class="small">/MO</span></div>
+        <div class="price-tease-meta">or $249.99/yr &middot; One price. Unlimited coaching.</div>
       </div>
-      <h2 class="cta-heading">Get on the <span class="accent">launch list.</span></h2>
-      <p class="cta-sub">Limited beta seats. Real riders, real coaching, real feedback — the testers who join now shape what the v1 product becomes.</p>
-      <a href="mailto:support@motocoachai.app?subject=Notify%20me%20at%20launch&body=I'd%20like%20to%20be%20notified%20when%20Moto%20Coach%20AI%20launches.%0A%0AMy%20skill%20level%3A%0AHow%20I%20heard%20about%20it%3A%0A" class="cta-large">
-        Email to get notified
+      <h2 class="cta-heading">Real coaching. <span class="accent">Every ride.</span></h2>
+      <p class="cta-sub">Live now on the App Store in 133 countries. Upload a clip, get coached, show up to the track with something specific to fix.</p>
+      <a href="https://apps.apple.com/us/app/moto-coach-ai/id6777779336" class="cta-large">
+        Download on the App Store
         <span class="arrow">→</span>
       </a>
-      <div class="cta-meta-dark">support@motocoachai.app · We reply.</div>
+      <div class="cta-meta-dark">Questions? support@motocoachai.app · We reply.</div>
+    </div>
+  </section>
+
+  <section class="giveaway-band reveal" id="giveaway">
+    <div class="container">
+      <div class="giveaway-grid">
+        <div class="giveaway-copy">
+          <div class="section-label">The Giveaway</div>
+          <h2 class="giveaway-heading">Win a <span class="accent">2026 Beta 450 RX.</span></h2>
+          <p class="giveaway-sub">
+            We're giving away a brand-new 2026 Beta 450 RX. Every annual Moto Coach AI subscriber is automatically entered to win.
+          </p>
+          <p class="giveaway-note">No purchase necessary. Void in NY, FL &amp; RI. See official rules for free entry &amp; details.</p>
+          <a href="/giveaway" class="giveaway-cta">
+            See the Giveaway
+            <span class="arrow">→</span>
+          </a>
+        </div>
+        <a href="/giveaway" class="giveaway-photo" aria-label="View the giveaway">
+          <span class="giveaway-badge">ARV $10,990</span>
+          <img src="/images/beta-450rx.png" alt="2026 Beta 450 RX dirt bike — giveaway prize">
+        </a>
+      </div>
     </div>
   </section>
 
@@ -1071,6 +1246,7 @@
           </div>
         </div>
         <div class="footer-links">
+          <a href="/giveaway">Giveaway</a>
           <a href="/privacy">Privacy</a>
           <a href="/terms">Terms</a>
           <a href="mailto:support@motocoachai.app">Support</a>
@@ -1089,6 +1265,27 @@
       { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
     );
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Dropdown nav
+    const navMenu = document.getElementById('navMenu');
+    const navToggle = document.getElementById('navToggle');
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = navMenu.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', (e) => {
+      if (!navMenu.contains(e.target)) {
+        navMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    navMenu.querySelectorAll('.nav-dropdown a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
   </script>
 
 </body>
